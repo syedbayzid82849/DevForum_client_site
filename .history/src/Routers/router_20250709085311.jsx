@@ -40,7 +40,8 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+
     }
 ]);
 

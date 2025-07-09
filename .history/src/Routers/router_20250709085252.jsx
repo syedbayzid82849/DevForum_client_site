@@ -40,7 +40,25 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>
+        element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+        children: [
+            {
+                path: "/dashboard/add-pet",
+                element: <AddPet />,
+            },
+            {
+                path: "/dashboard/manage-my-pets",
+                element: <ManageMyPets />,
+            },
+            {
+                path: "/dashboard/my-follows",
+                element: <MyFollows />,
+            },
+            {
+                path: "/dashboard/profile",
+                element: <Profile />,
+            },
+        ],
     }
 ]);
 

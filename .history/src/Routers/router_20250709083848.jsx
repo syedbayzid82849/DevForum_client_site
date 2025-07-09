@@ -3,11 +3,8 @@ import { createBrowserRouter } from 'react-router';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import Login from '../pages/Authentication/Login';
 import Home from '../pages/Home/Home';
+import AuthLayout from '../pages/Authentication/AuthLayout';
 import Register from '../pages/Authentication/Register';
-import Membership from '../components/Membership/Membership';
-import AuthLayout from '../layouts/AuthLayout/AuthLayout';
-import PrivateRoute from './PrivateRoute';
-import DashboardLayout from '../layouts/DashboardLayout/DashboardLayout';
 
 const router = createBrowserRouter([
     {
@@ -18,10 +15,7 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
             },
-            {
-                path: "/membership",
-                element: <Membership />,
-            }
+            {}
         ],
     },
     {
@@ -38,10 +32,6 @@ const router = createBrowserRouter([
             },
         ],
     },
-    {
-        path: "/dashboard",
-        element: <PrivateRoute><DashboardLayout /></PrivateRoute>
-    }
 ]);
 
 export default router;
