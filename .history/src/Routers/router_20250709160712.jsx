@@ -9,7 +9,6 @@ import AuthLayout from '../layouts/AuthLayout/AuthLayout';
 import PrivateRoute from './PrivateRoute';
 import DashboardLayout from '../layouts/DashboardLayout/DashboardLayout';
 import AddPost from '../pages/Dashbard/AddPost/AddPost';
-import MyPosts from '../pages/Dashbard/MyPosts/MyPosts';
 
 const router = createBrowserRouter([
     {
@@ -47,10 +46,6 @@ const router = createBrowserRouter([
             {
                 path: "add-post",
                 element: <AddPost />,
-            },
-            {
-                path: "my-posts",
-                element: <MyPosts />,
             },
         ],
     }
