@@ -191,30 +191,21 @@ const AddPost = () => {
                                             borderColor: errors.tag ? 'red' : baseStyles.borderColor,
                                             '&:hover': { borderColor: errors.tag ? 'red' : baseStyles['&:hover'].borderColor },
                                         }),
-                                        // Add this to make text black
+                                        // এখানে নতুন স্টাইল যুক্ত করা হয়েছে
                                         option: (baseStyles, state) => ({
                                             ...baseStyles,
-                                            color: 'black', // Option text color
-                                            backgroundColor: state.isFocused ? '#e0e0e0' : 'white', // Focused option background
-                                            ':active': {
-                                                backgroundColor: state.isSelected ? baseStyles.backgroundColor : '#cccccc',
-                                            },
+                                            color: 'black', // অপশনের টেক্সট কালার কালো
+                                            // অপশন হোভার করলে বা সিলেক্ট হলে ব্যাকগ্রাউন্ড কালারও সেট করতে পারেন
+                                            backgroundColor: state.isFocused ? '#f0f0f0' : baseStyles.backgroundColor, // হোভার কালার
+                                            backgroundColor: state.isSelected ? '#e0e0e0' : baseStyles.backgroundColor, // সিলেক্টেড কালার
                                         }),
                                         multiValueLabel: (baseStyles) => ({
                                             ...baseStyles,
-                                            color: 'black', // Selected tag text color within the input
+                                            color: 'black', // সিলেক্টেড ট্যাগের লেবেলের কালার কালো
                                         }),
                                         singleValue: (baseStyles) => ({
                                             ...baseStyles,
-                                            color: 'black', // For single select (though you have isMulti=true)
-                                        }),
-                                        input: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: 'black', // Typed input text color
-                                        }),
-                                        placeholder: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: '#a0a0a0', // Placeholder text color (e.g., "Select tags...")
+                                            color: 'black', // যদি single select হয়, সিলেক্টেড ভ্যালুর কালার কালো
                                         }),
                                     }}
                                 />

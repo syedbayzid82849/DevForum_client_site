@@ -1,4 +1,4 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form"; 
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
@@ -6,26 +6,26 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'; 
 
 const AddPost = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
 
     // Get post count for user
-    const { data, isPending, refetch } = useQuery({
+    const { data, isPending, refetch } = useQuery({ 
         queryKey: ['postCount', user?.email],
         queryFn: async () => {
             const res = await axios.get(`http://localhost:3000/posts/count?email=${user.email}`);
             return res.data;
         },
-        enabled: !!user?.email,
+        enabled: !!user?.email, 
     });
 
     const {
         register,
         handleSubmit,
-        control,
+        control, 
         formState: { errors },
 
     } = useForm({
@@ -53,32 +53,36 @@ const AddPost = () => {
         const tags = formData.tag ? formData.tag.map(tag => tag.value) : [];
 
         const post = {
-            authorImage: formData.authorImage,
-            authorName: formData.authorName,
-            authorEmail: formData.authorEmail,
+            authorImage: formData.authorImage, 
+            authorName: formData.authorName,   
+            authorEmail: formData.authorEmail, 
             title: formData.postTitle,
             description: formData.postDescription,
             tags: tags,
+            // tag: tag, // যদি single tag হয়, "tag" স্ট্রিং হিসেবে পাঠান
             upVote: formData.upVote,
             downVote: formData.downVote,
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString() // পোস্ট তৈরির সময়
         };
 
         try {
             await axios.post("http://localhost:3000/posts", post);
             toast.success('Post added successfully!');
-            refetch();
-            navigate("/dashboard/my-posts");
+            reset(); // ফর্ম রিসেট করুন
+            refetch(); // পোস্ট কাউন্ট আপডেট করতে refetch করুন
+            navigate("/dashboard/my-posts"); // my-posts পেজে রিডাইরেক্ট করুন
         } catch (error) {
             console.error("Error adding post:", error);
             toast.error('Failed to add post. Please try again.');
         }
     };
 
+    // বর্তমান Firebase ইউজারের তথ্য, যদি AuthContext থেকে `user` আসে
     const currentUser = user;
 
     if (isPending) return <LoadingSpinner />;
 
+    // নিশ্চিত করুন data এবং data.count আছে
     if (data && data.count >= 5) {
         return (
             <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] p-4">
@@ -105,6 +109,7 @@ const AddPost = () => {
                 <h2 className="text-4xl font-bold text-center mb-8">Add New Post</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                    {/* Author Image (প্রোফাইল পিকচার দেখানোর জন্য) */}
                     <div className="form-control text-center">
                         <label className="label">
                             <span className="label-text">Author Image</span>
@@ -116,6 +121,7 @@ const AddPost = () => {
                         </div>
                     </div>
 
+                    {/* Author Name (Read-only) */}
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Author Name</span>
@@ -123,8 +129,8 @@ const AddPost = () => {
                         <input
                             type="text"
                             readOnly
-                            {...register('authorName')}
-                            className="input input-bordered w-full  cursor-not-allowed"
+                            {...register('authorName')} // defaultValues থেকে আসবে
+                            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
                         />
                     </div>
 
@@ -136,8 +142,8 @@ const AddPost = () => {
                         <input
                             type="email"
                             readOnly
-                            {...register('authorEmail')}
-                            className="input input-bordered w-full  cursor-not-allowed"
+                            {...register('authorEmail')} // defaultValues থেকে আসবে
+                            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
                         />
                     </div>
 
@@ -174,14 +180,14 @@ const AddPost = () => {
                             <span className="label-text">Select Tags</span>
                         </label>
                         <Controller
-                            name="tag"
+                            name="tag" // এই নামটিই onSubmit ডেটাতে key হিসেবে আসবে
                             control={control}
                             rules={{ required: 'Please select at least one tag' }}
                             render={({ field }) => (
                                 <Select
                                     {...field}
                                     options={tagOptions}
-                                    isMulti={true}
+                                    isMulti={true} // একাধিক ট্যাগ সিলেক্ট করার জন্য
                                     className="basic-multi-select"
                                     classNamePrefix="select"
                                     placeholder="Select tags..."
@@ -190,31 +196,6 @@ const AddPost = () => {
                                             ...baseStyles,
                                             borderColor: errors.tag ? 'red' : baseStyles.borderColor,
                                             '&:hover': { borderColor: errors.tag ? 'red' : baseStyles['&:hover'].borderColor },
-                                        }),
-                                        // Add this to make text black
-                                        option: (baseStyles, state) => ({
-                                            ...baseStyles,
-                                            color: 'black', // Option text color
-                                            backgroundColor: state.isFocused ? '#e0e0e0' : 'white', // Focused option background
-                                            ':active': {
-                                                backgroundColor: state.isSelected ? baseStyles.backgroundColor : '#cccccc',
-                                            },
-                                        }),
-                                        multiValueLabel: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: 'black', // Selected tag text color within the input
-                                        }),
-                                        singleValue: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: 'black', // For single select (though you have isMulti=true)
-                                        }),
-                                        input: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: 'black', // Typed input text color
-                                        }),
-                                        placeholder: (baseStyles) => ({
-                                            ...baseStyles,
-                                            color: '#a0a0a0', // Placeholder text color (e.g., "Select tags...")
                                         }),
                                     }}
                                 />
@@ -232,7 +213,7 @@ const AddPost = () => {
                             type="number"
                             readOnly
                             {...register('upVote')}
-                            className="input input-bordered w-full  cursor-not-allowed"
+                            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
                         />
                     </div>
 
@@ -245,7 +226,7 @@ const AddPost = () => {
                             type="number"
                             readOnly
                             {...register('downVote')}
-                            className="input input-bordered w-full  cursor-not-allowed"
+                            className="input input-bordered w-full bg-gray-100 cursor-not-allowed"
                         />
                     </div>
 
