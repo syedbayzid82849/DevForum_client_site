@@ -13,15 +13,7 @@ const AddPost = () => {
     const navigate = useNavigate();
     const [selectedTag, setSelectedTag] = useState(null);
 
-    // Get post count for user
-    const { data, isPending } = useQuery({
-        queryKey: ['postCount', user?.email],
-        queryFn: async () => {
-            const res = await axios.get(`http://localhost:3000/posts/count?email=${user.email}`);
-            return res.data;
-        },
-        enabled: !!user?.email,
-    });
+
 
     const {
         register,

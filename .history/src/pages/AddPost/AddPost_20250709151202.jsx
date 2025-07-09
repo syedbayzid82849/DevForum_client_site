@@ -6,14 +6,13 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const AddPost = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [selectedTag, setSelectedTag] = useState(null);
 
-    // Get post count for user
+    // Step 1: Get post count for user
     const { data, isPending } = useQuery({
         queryKey: ['postCount', user?.email],
         queryFn: async () => {

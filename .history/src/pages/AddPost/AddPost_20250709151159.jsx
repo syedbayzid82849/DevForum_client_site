@@ -13,7 +13,7 @@ const AddPost = () => {
     const navigate = useNavigate();
     const [selectedTag, setSelectedTag] = useState(null);
 
-    // Get post count for user
+    // Step 1: Get post count for user
     const { data, isPending } = useQuery({
         queryKey: ['postCount', user?.email],
         queryFn: async () => {
