@@ -3,11 +3,10 @@ import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthContext";
 import { NavLink, useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const JoinUsModal = ({ closeModal }) => {
-    const { userWithGoogle } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
+    const { user, userWithGoogle } = useContext(AuthContext);
+    const 
 
     const navigate = useNavigate();
     const handleGoogleSignIn = () => {

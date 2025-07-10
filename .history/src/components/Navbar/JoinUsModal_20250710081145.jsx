@@ -2,12 +2,10 @@ import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthContext";
 import { NavLink, useNavigate } from "react-router";
-import toast from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const JoinUsModal = ({ closeModal }) => {
-    const { userWithGoogle } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
+    const { user, userWithGoogle } = useContext(AuthContext);
+    console.log(user);
 
     const navigate = useNavigate();
     const handleGoogleSignIn = () => {
@@ -33,7 +31,7 @@ const JoinUsModal = ({ closeModal }) => {
                     })
                     .catch(err => {
                         console.error("DB Save Error:", err);
-                        toast.error("Google sign-in successful, but DB save failed.");
+                        toast\.error("Google sign-in successful, but DB save failed.");
                         closeModal();
                         navigate("/");
                     });

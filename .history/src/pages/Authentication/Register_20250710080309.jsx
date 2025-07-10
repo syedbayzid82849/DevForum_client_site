@@ -18,6 +18,7 @@ const Register = () => {
     const [showConfirm, setShowConfirm] = useState(false);
 
     const onSubmit = (data) => {
+        console.log("Registration Data:", data);
 
         createUserWithEP(data.email, data.password)
             .then(() => {
@@ -31,9 +32,11 @@ const Register = () => {
                             role: "user",
                             badge: "Bronze"
                         };
+                        console.log('User data to save:', saveUser);
 
                         axiosSecure.post("/users", saveUser)
-                            .then(() => {
+                            .then(res => {
+                                console.log("User saved to DB:", res.data);
                                 toast.success('Registration successful!');
                                 navigate('/');
                             })

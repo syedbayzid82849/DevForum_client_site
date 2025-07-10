@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const JoinUsModal = ({ closeModal }) => {
-    const { userWithGoogle } = useContext(AuthContext);
+    const { user, userWithGoogle } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
 
     const navigate = useNavigate();

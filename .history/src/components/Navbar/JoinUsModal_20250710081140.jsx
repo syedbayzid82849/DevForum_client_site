@@ -2,42 +2,40 @@ import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthContext";
 import { NavLink, useNavigate } from "react-router";
-import toast from "react-hot-toast";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const JoinUsModal = ({ closeModal }) => {
-    const { userWithGoogle } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
+    const { user, userWithGoogle } = useContext(AuthContext);
+    console.log(user);
 
     const navigate = useNavigate();
     const handleGoogleSignIn = () => {
         console.log("Google Sign-In");
         userWithGoogle()
-            .then(res => {
-                const loggedUser = res.user;
-                console.log("Google user:", loggedUser);
+        .then(res => {
+            const loggedUser = res.user;
+            console.log("Google user:", loggedUser);
 
-                // ✅ Save user to DB
-                const saveUser = {
-                    name: loggedUser.displayName,
-                    email: loggedUser.email,
-                    role: "user",
-                    badge: "Bronze"
-                };
+            // ✅ Save user to DB
+            const saveUser = {
+                name: loggedUser.displayName,
+                email: loggedUser.email,
+                role: "user",
+                badge: "Bronze"
+            };
 
-                axiosSecure.post("/users", saveUser)
-                    .then(res => {
-                        console.log("Google user saved:", res.data);
-                        closeModal();
-                        navigate("/");
-                    })
-                    .catch(err => {
-                        console.error("DB Save Error:", err);
-                        toast.error("Google sign-in successful, but DB save failed.");
-                        closeModal();
-                        navigate("/");
-                    });
-            })
+            axiosSecure.post("/users", saveUser)
+                .then(res => {
+                    console.log("Google user saved:", res.data);
+                    closeModal();
+                    navigate("/");
+                })
+                .catch(err => {
+                    console.error("DB Save Error:", err);
+                    toast.error("Google sign-in successful, but DB save failed.");
+                    closeModal();
+                    navigate("/");
+                });
+        })
             .catch(err => {
                 console.error("Google Sign-In Error:", err);
             })

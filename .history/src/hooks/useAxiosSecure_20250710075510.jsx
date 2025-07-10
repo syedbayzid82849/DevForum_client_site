@@ -1,15 +1,3 @@
-import axios from 'axios';
-
-const axiosSecure = axios.create({
-    baseURL: `http://localhost:3000`,
-    withCredentials: true // optional, if your server uses cookies
-});
-
-const useAxiosSecure = () => {
-    return axiosSecure;
-};
-
-export default useAxiosSecure;
 // import axios from 'axios';
 // import React, { useContext } from 'react';
 // import { useNavigate } from 'react-router';

@@ -4,7 +4,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
+// import useAxiosSecure from '../../hooks/useAxiosSecure';
+import axios from 'axios';
 
 const Register = () => {
     const { createUserWithEP, updateUserProfile } = useContext(AuthContext);
@@ -18,11 +19,13 @@ const Register = () => {
     const [showConfirm, setShowConfirm] = useState(false);
 
     const onSubmit = (data) => {
+        console.log("Registration Data:", data);
 
         createUserWithEP(data.email, data.password)
             .then(() => {
                 updateUserProfile(data.name)
                     .then(() => {
+                        console.log("User profile updated!");
 
                         // ✅ Save to MongoDB using axiosSecure
                         const saveUser = {
@@ -31,9 +34,11 @@ const Register = () => {
                             role: "user",
                             badge: "Bronze"
                         };
+                        console.log('User data to save:', saveUser);
 
-                        axiosSecure.post("/users", saveUser)
-                            .then(() => {
+                        axioss.post("http://localhost:3000/users", saveUser)
+                            .then(res => {
+                                console.log("User saved to DB:", res.data);
                                 toast.success('Registration successful!');
                                 navigate('/');
                             })

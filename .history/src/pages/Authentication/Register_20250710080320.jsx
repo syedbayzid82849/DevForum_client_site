@@ -33,7 +33,8 @@ const Register = () => {
                         };
 
                         axiosSecure.post("/users", saveUser)
-                            .then(() => {
+                            .then(res => {
+                                console.log("User saved to DB:", res.data);
                                 toast.success('Registration successful!');
                                 navigate('/');
                             })
