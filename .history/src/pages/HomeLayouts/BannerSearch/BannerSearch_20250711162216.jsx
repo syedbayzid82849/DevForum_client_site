@@ -1,7 +1,4 @@
-import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const BannerSearch = ({ setSearchResult, setSearchLoading, setSearchError }) => {
     const [searchTag, setSearchTag] = useState("");
@@ -40,25 +37,13 @@ const BannerSearch = ({ setSearchResult, setSearchLoading, setSearchError }) => 
 
     return (
         <div className="text-center">
-            <div className="relative w-60 mx-auto">
-                <input
-                    type="text"
-                    placeholder="Search by tag..."
-                    value={searchTag}
-                    onChange={(e) => setSearchTag(e.target.value)}
-                    className="input input-bordered w-full pr-10"
-                />
-
-                {searchTag && (
-                    <button
-                        onClick={() => setSearchTag("")}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-red-600"
-                        title="Clear"
-                    >
-                        &times;
-                    </button>
-                )}
-            </div>
+            <input
+                type="text"
+                placeholder="Search by tag..."
+                value={searchTag}
+                onChange={(e) => setSearchTag(e.target.value)}
+                className="input input-bordered w-60"
+            />
             <button onClick={handleSearch} className="btn btn-primary sm:mt-2 ml-2">
                 Search
             </button>

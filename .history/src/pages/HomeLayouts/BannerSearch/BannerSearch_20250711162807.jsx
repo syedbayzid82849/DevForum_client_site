@@ -1,8 +1,7 @@
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
-
+import
 const BannerSearch = ({ setSearchResult, setSearchLoading, setSearchError }) => {
     const [searchTag, setSearchTag] = useState("");
     const axiosSecure = useAxiosSecure();
