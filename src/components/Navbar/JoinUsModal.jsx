@@ -11,7 +11,6 @@ const JoinUsModal = ({ closeModal }) => {
 
     const navigate = useNavigate();
     const handleGoogleSignIn = () => {
-        console.log("Google Sign-In");
         userWithGoogle()
             .then(res => {
                 const loggedUser = res.user;

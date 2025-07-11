@@ -4,7 +4,7 @@ import { Outlet } from 'react-router';
 
 const MainLayout = () => {
     return (
-        <div className=" mx-auto flex flex-col border">
+        <div className=" mx-auto flex flex-col">
             <Navbar />
 
             <main className="flex-1">

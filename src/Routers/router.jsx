@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import MainLayout from '../layouts/MainLayout/MainLayout';
 import Login from '../pages/Authentication/Login';
-import Home from '../pages/Home/Home';
+import Home from '../pages/HomeLayouts/Home';
 import Register from '../pages/Authentication/Register';
 import Membership from '../components/Membership/Membership';
 import AuthLayout from '../layouts/AuthLayout/AuthLayout';
