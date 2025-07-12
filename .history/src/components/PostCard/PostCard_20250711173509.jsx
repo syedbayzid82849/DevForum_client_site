@@ -35,7 +35,7 @@ const PostCard = ({ post }) => {
     const likesCount = upVote ? upVote.length : 0;
     const commentsCount = 37;
     return (
-        <div className="bg-white rounded-lg shadow-md max-w-xl mx-auto overflow-hidden w-full">
+        <div className="bg-white max-w-7xl mx-auto rounded-lg shadow-md max-w-xl mx-auto overflow-hidden w-full">
             {/* Header Section */}
             <div className="flex items-center p-4">
                 <img

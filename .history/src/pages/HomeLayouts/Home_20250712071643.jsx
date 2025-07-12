@@ -21,7 +21,7 @@ const Home = () => {
                 isLoading={searchLoading}
                 isError={searchError}
             />
-            <AllPosts></AllPosts>
+            <AllPosts
         </div>
     );
 };

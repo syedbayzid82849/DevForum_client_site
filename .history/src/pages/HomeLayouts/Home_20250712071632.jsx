@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import HeroSection from './HeroSection/HeroSection';
 import SearchResults from './SearchResults/SearchResults';
-import AllPosts from './AllPosts/AllPosts';
 
 const Home = () => {
     const [searchResult, setSearchResult] = useState([]);
@@ -21,7 +20,7 @@ const Home = () => {
                 isLoading={searchLoading}
                 isError={searchError}
             />
-            <AllPosts></AllPosts>
+            
         </div>
     );
 };

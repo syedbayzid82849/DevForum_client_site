@@ -40,7 +40,7 @@ const AddPost = () => {
             tag: [],
             upVote: [],
             downVote: [],
-            commentCount: [],
+            commentCount: 4,
             createdAt: new Date().toISOString()
 
         }

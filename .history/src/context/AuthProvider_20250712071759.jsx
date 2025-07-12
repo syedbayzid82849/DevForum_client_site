@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../firebase/firebase.init';
-import useAxiosSecure from '../hooks/useAxiosSecure';
 
 
 const AuthProvider = ({ children }) => {
@@ -11,7 +10,6 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     // user chack
     const [user, setUser] = useState(null);
-    const axiosSecure= useAxiosSecure();
 
     // create user with name, email, password, photoURL
     const createUserWithEP = (email, password) => {
@@ -46,7 +44,19 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
-
+    // // get all courses from the server
+    // const getAllPag = () => {
+    //     setLoading(true);
+    //     return axios.get('https://academix-hub-server.vercel.app/all-course')
+    //         .then(response => {
+    //             setLoading(false);
+    //             return response.data;
+    //         })
+    //         .catch(error => {
+    //             console.error("Error fetching courses:", error);
+    //             throw error;
+    //         });
+    // }
 
     // user check
     useEffect(() => {
@@ -69,7 +79,6 @@ const AuthProvider = ({ children }) => {
         userWithGoogle,
         updateUserProfile,
         signOutUser,
-        getAllPosts
     };
     return (
         <AuthContext.Provider value={authInformation}>

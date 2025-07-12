@@ -46,7 +46,19 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
-
+    // get all posts from the server
+    const getAllPosts = () => {
+        setLoading(true);
+        return axiosSecure.get('https://academix-hub-server.vercel.app/all-posts')
+            .then(response => {
+                setLoading(false);
+                return response.data;
+            })
+            .catch(error => {
+                console.error("Error fetching courses:", error);
+                throw error;
+            });
+    }
 
     // user check
     useEffect(() => {
@@ -69,7 +81,7 @@ const AuthProvider = ({ children }) => {
         userWithGoogle,
         updateUserProfile,
         signOutUser,
-        getAllPosts
+        
     };
     return (
         <AuthContext.Provider value={authInformation}>

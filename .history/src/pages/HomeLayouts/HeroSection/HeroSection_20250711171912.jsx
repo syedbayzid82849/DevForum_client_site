@@ -8,8 +8,8 @@ const HeroSection = ({ setSearchResult, setSearchLoading, setSearchError }) => {
             className=" text-center bg-cover bg-center flex flex-col items-center justify-center"
             style={{ backgroundImage: `url(${backgroundImage})`, minHeight: "500px" }}
         >
-            <div className="p-5 max-w-2xl mx-auto">
-                <h1 className="text-4xl font-bold text-gray-900">Welcome to the Pet Management Platform</h1>
+            <div className="p-5   border">
+                <h1 className="text-4xl font-bold md:px-36text-gray-900">Welcome to the Pet Management Platform</h1>
                 <p className="text-xl text-gray-900">Manage and explore pets easily with us</p>
             </div>
             <BannerSearch
