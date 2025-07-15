@@ -8,14 +8,15 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const Payment = () => {
     const location = useLocation();
-    const amount = location.state?.amount || 9.99;
+    const amount = location.state?.amount || 0;
+    console.log(amount);
 
 
     return (
         <div className="max-w-xl mx-auto p-4">
             <h2 className="text-2xl font-bold text-center mb-4">Complete Payment</h2>
             <Elements stripe={stripePromise}>
-                <PaymentForm amount={amount} />
+                <PaymentForm />
             </Elements>
         </div>
     );

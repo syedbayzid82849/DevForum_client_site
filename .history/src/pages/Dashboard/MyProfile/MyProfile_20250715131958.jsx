@@ -68,7 +68,7 @@ const MyProfile = () => {
 
     // Badge logic
     const badge =
-        dbUser?.badge === "Gold"
+        dbUser?.badge === "G"
             ? { label: "Gold", icon: "/src/assets/gold-Badge.png" }
             : { label: "Bronze", icon: "/src/assets/bronze-Badge.png" };
 

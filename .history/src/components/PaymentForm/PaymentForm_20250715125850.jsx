@@ -80,7 +80,7 @@ const PaymentForm = ({ amount }) => {
             });
 
             toast.success("🎉 You are now a Gold member!");
-            navigate('/dashboard/my-profile'); 
+            navigate('/dashboard/profile'); // Or any route
         }
 
         setProcessing(false);
@@ -88,44 +88,44 @@ const PaymentForm = ({ amount }) => {
 
     return (
         <div className=" w-3xl">
-            <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-yellow-200"
-            >
-                <h2 className="text-3xl font-bold text-yellow-600 text-center">Become a Gold Member</h2>
-                <p className="text-center text-gray-500">Pay ${amount} to unlock unlimited features</p>
+<form
+  onSubmit={handleSubmit}
+  className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-yellow-200"
+>
+  <h2 className="text-3xl font-bold text-yellow-600 text-center">Become a Gold Member</h2>
+  <p className="text-center text-gray-500">Pay ${amount} to unlock unlimited features</p>
 
-                <div className="p-4 border-2 border-yellow-300 rounded-lg shadow-sm bg-yellow-50">
-                    <CardElement
-                        className="py-2 px-3 bg-white rounded-md text-gray-700"
-                        options={{
-                            style: {
-                                base: {
-                                    fontSize: '16px',
-                                    color: '#424770',
-                                    '::placeholder': {
-                                        color: '#aab7c4',
-                                    },
-                                },
-                                invalid: {
-                                    color: '#9e2146',
-                                },
-                            },
-                        }}
-                    />
-                </div>
+  <div className="p-4 border-2 border-yellow-300 rounded-lg shadow-sm bg-yellow-50">
+    <CardElement
+      className="py-2 px-3 bg-white rounded-md text-gray-700"
+      options={{
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#424770',
+            '::placeholder': {
+              color: '#aab7c4',
+            },
+          },
+          invalid: {
+            color: '#9e2146',
+          },
+        },
+      }}
+    />
+  </div>
 
-                {/* 🟥 Error message here */}
-                {error && <p className="text-red-500 text-sm">{error}</p>}
+  {/* 🟥 Error message here */}
+  {error && <p className="text-red-500 text-sm">{error}</p>}
 
-                <button
-                    disabled={!stripe || processing}
-                    type="submit"
-                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-200"
-                >
-                    {processing ? "Processing..." : `Pay $${amount}`}
-                </button>
-            </form>
+  <button
+    disabled={!stripe || processing}
+    type="submit"
+    className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-200"
+  >
+    {processing ? "Processing..." : `Pay $${amount}`}
+  </button>
+</form>
 
 
         </div>

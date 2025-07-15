@@ -28,10 +28,11 @@ const PaymentForm = ({ amount }) => {
         if (!card) return;
 
         // Step 1: Create payment method
-        const { error: methodError } = await stripe.createPaymentMethod({
+        const { error: methodError, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card
         });
+
         if (methodError) {
             setError(methodError.message);
             return;
@@ -41,7 +42,8 @@ const PaymentForm = ({ amount }) => {
 
         // Step 2: Create payment intent from server
         setProcessing(true);
-        const res = await axiosSecure.post('/create-payment-intent', { price: amountInCents });
+        const res = await axiosSecure.post('/create-payment-intent', { price: amount });
+
         const clientSecret = res?.data?.clientSecret;
         if (!clientSecret) {
             toast.error("Failed to initialize payment");
@@ -80,24 +82,21 @@ const PaymentForm = ({ amount }) => {
             });
 
             toast.success("🎉 You are now a Gold member!");
-            navigate('/dashboard/my-profile'); 
+            navigate('/dashboard/profile'); // Or any route
         }
 
         setProcessing(false);
     };
 
     return (
-        <div className=" w-3xl">
-            <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-yellow-200"
-            >
-                <h2 className="text-3xl font-bold text-yellow-600 text-center">Become a Gold Member</h2>
-                <p className="text-center text-gray-500">Pay ${amount} to unlock unlimited features</p>
+        <div>
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl shadow-md w-full max-w-md mx-auto border border-yellow-200">
+                <h2 className="text-2xl font-bold text-center text-yellow-600">Become a Gold Member</h2>
+                <p className="text-center text-gray-500">Pay ${amount} to unlock all features</p>
 
-                <div className="p-4 border-2 border-yellow-300 rounded-lg shadow-sm bg-yellow-50">
+                <div className="p-4 border-2 border-yellow-300 rounded-lg bg-yellow-50">
                     <CardElement
-                        className="py-2 px-3 bg-white rounded-md text-gray-700"
+                        className="py-2 px-3 bg-white rounded-md"
                         options={{
                             style: {
                                 base: {
@@ -115,19 +114,16 @@ const PaymentForm = ({ amount }) => {
                     />
                 </div>
 
-                {/* 🟥 Error message here */}
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-
                 <button
-                    disabled={!stripe || processing}
                     type="submit"
+                    disabled={!stripe || processing}
                     className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-200"
                 >
-                    {processing ? "Processing..." : `Pay $${amount}`}
+                    {processing ? 'Processing...' : `Pay $${amount}`}
                 </button>
+
+                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             </form>
-
-
         </div>
     );
 };

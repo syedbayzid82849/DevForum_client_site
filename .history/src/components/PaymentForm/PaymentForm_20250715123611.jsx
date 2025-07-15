@@ -28,10 +28,11 @@ const PaymentForm = ({ amount }) => {
         if (!card) return;
 
         // Step 1: Create payment method
-        const { error: methodError } = await stripe.createPaymentMethod({
+        const { error: methodError, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card
         });
+
         if (methodError) {
             setError(methodError.message);
             return;
@@ -41,7 +42,8 @@ const PaymentForm = ({ amount }) => {
 
         // Step 2: Create payment intent from server
         setProcessing(true);
-        const res = await axiosSecure.post('/create-payment-intent', { price: amountInCents });
+        const res = await axiosSecure.post('/create-payment-intent', { price: amount });
+
         const clientSecret = res?.data?.clientSecret;
         if (!clientSecret) {
             toast.error("Failed to initialize payment");
@@ -80,7 +82,7 @@ const PaymentForm = ({ amount }) => {
             });
 
             toast.success("🎉 You are now a Gold member!");
-            navigate('/dashboard/my-profile'); 
+            navigate('/dashboard/profile'); // Or any route
         }
 
         setProcessing(false);
@@ -115,18 +117,14 @@ const PaymentForm = ({ amount }) => {
                     />
                 </div>
 
-                {/* 🟥 Error message here */}
-                {error && <p className="text-red-500 text-sm">{error}</p>}
-
                 <button
-                    disabled={!stripe || processing}
+                    disabled={!stripe}
                     type="submit"
                     className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-200"
                 >
-                    {processing ? "Processing..." : `Pay $${amount}`}
+                    Pay ${amount}
                 </button>
             </form>
-
 
         </div>
     );

@@ -26,12 +26,12 @@ const MyProfile = () => {
         queryKey: ["userProfile", user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/${user.email}`);
-            console.log(res);
+            console.log(object);
             return res.data;
         },
         enabled: !!user?.email,
     });
-    console.log(dbUser.role);
+    console.log(dbUser);
 
     // Set modal form with current user data
     const handleEditClick = () => {
@@ -68,7 +68,7 @@ const MyProfile = () => {
 
     // Badge logic
     const badge =
-        dbUser?.badge === "Gold"
+        dbUser?.role === "member"
             ? { label: "Gold", icon: "/src/assets/gold-Badge.png" }
             : { label: "Bronze", icon: "/src/assets/bronze-Badge.png" };
 

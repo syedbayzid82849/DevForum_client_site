@@ -80,7 +80,7 @@ const PaymentForm = ({ amount }) => {
             });
 
             toast.success("🎉 You are now a Gold member!");
-            navigate('/dashboard/my-profile'); 
+            navigate('/dashboard/profile'); // Or any route
         }
 
         setProcessing(false);

@@ -31,7 +31,7 @@ const MyProfile = () => {
         },
         enabled: !!user?.email,
     });
-    console.log(dbUser.role);
+    console.log(dbUser);
 
     // Set modal form with current user data
     const handleEditClick = () => {
@@ -67,9 +67,10 @@ const MyProfile = () => {
     };
 
     // Badge logic
-    const badge =
-        dbUser?.badge === "Gold"
-            ? { label: "Gold", icon: "/src/assets/gold-Badge.png" }
+const badge =
+    dbUser?.badge === "Gold"
+        ? { label: "Gold", icon: "/src/assets/gold-Badge.png" }
+        : { label: "Bronze", icon: "/src/assets/bronze-Badge.png" };
             : { label: "Bronze", icon: "/src/assets/bronze-Badge.png" };
 
     return (
