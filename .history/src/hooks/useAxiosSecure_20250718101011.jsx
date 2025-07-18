@@ -1,0 +1,24 @@
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import axios from 'axios';
+
+const axiosSecure = axios.create({
+    baseURL: `http://localhost:3000`
+});
+
+const useAxiosSecure = () => {
+
+    const { user } = useContext(AuthContext);
+
+    axios.interceptors.request.use(function (config) {
+        // Do something before request is sent
+        return config;
+    }, function (error) {
+        // Do something with request error
+        return Promise.reject(error);
+    });
+
+    return axiosSecure;
+};
+
+export default useAxiosSecure;
