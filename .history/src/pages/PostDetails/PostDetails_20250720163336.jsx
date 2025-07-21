@@ -62,7 +62,7 @@ const PostDetails = () => {
                 postId: id,
                 comment: commentText,
                 email: user?.email,
-                reporterEmail: []
+                reporter
             });
             Swal.fire("Submitted!", "The comment has been submitted.", "success");
         } catch (error){

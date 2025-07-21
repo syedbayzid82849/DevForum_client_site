@@ -12,7 +12,8 @@ const AllComments = () => {
     const [selectedFeedback, setSelectedFeedback] = useState({});
     const [reportedComments, setReportedComments] = useState([]);
     const [modalComment, setModalComment] = useState(null);
-    const { user } = useContext(AuthContext);
+    const {user } = useContext(AuthContext);
+    console.log(user);
 
     const { data: comments = [], isLoading } = useQuery({
         queryKey: ["comments", postId],
@@ -28,9 +29,8 @@ const AllComments = () => {
 
     const handleReport = async (commentId) => {
         try {
-            await axiosSecure.patch(`/comments/reports/${commentId}`, {
-                commentId: commentId,
-                reporterEmail: user.email,
+            await axiosSecure.patch(`/comments/report/${commentId}`, {
+                reporterEmail: 'husains82849@gmail.com', // ✅ camelCase
                 feedback: selectedFeedback[commentId],
             });
             Swal.fire("Reported!", "The comment has been reported.", "success");
@@ -49,8 +49,8 @@ const AllComments = () => {
     ];
 
     return (
-        <div className="p-4 max-w-7xl mx-auto">
-            <h2 className="text-xl font-bold mb-4 text-center">All Comments</h2>
+        <div className="p-4">
+            <h2 className="text-xl font-bold mb-4">All Comments</h2>
 
             {comments.length === 0 && (
                 <p className="text-gray-500 italic">No comments available yet.</p>

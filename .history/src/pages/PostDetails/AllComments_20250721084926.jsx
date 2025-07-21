@@ -49,8 +49,8 @@ const AllComments = () => {
     ];
 
     return (
-        <div className="p-4 max-w-7xl mx-auto">
-            <h2 className="text-xl font-bold mb-4 text-center">All Comments</h2>
+        <div className="p-4 maxw">
+            <h2 className="text-xl font-bold mb-4">All Comments</h2>
 
             {comments.length === 0 && (
                 <p className="text-gray-500 italic">No comments available yet.</p>

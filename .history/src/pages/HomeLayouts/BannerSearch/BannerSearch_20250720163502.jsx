@@ -27,7 +27,7 @@ const BannerSearch = ({ setSearchResult, setSearchLoading, setSearchError }) => 
     // 🔄 Reflect to parent
     useEffect(() => {
         setSearchResult(searchData);
-    }, [searchData, setSearchResult]);
+    }, []);
 
     useEffect(() => {
         setSearchLoading(isSearchLoading);
