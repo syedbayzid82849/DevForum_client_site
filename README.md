@@ -1,6 +1,6 @@
-# Pawfect Forum - Client
+# DevForum Forum - Client
 
-**Pawfect** is a full-featured MERN Stack Forum application that allows users to post, vote, comment, share, and collaborate in a structured discussion platform. This is the client-side (frontend) repository of the project, built using **React**, **Tailwind CSS**, and other modern tools.
+**DevForum** is a full-featured MERN Stack Forum application that allows users to post, vote, comment, share, and collaborate in a structured discussion platform. This is the client-side (frontend) repository of the project, built using **React**, **Tailwind CSS**, and other modern tools.
 
 ## 🌐 Live Website
 
